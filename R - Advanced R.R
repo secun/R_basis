@@ -1,5 +1,4 @@
 ####### Componentes Basicos #######
-
 #data frames
 df <- data.frame(runif(3), runif(3))
 names(df) <- c(1, 2)
@@ -32,7 +31,7 @@ a <- 1:3
 attr(a, "x") <- "abcdef"
 attr(a, "x")
 
-#arrays definition & structure
+# Arrays definition & structure
 x1 <- array(1:5, c(1, 1, 5))
 x2 <- array(1:5, c(1, 5, 1))
 x3 <- array(1:5, c(5, 1, 1))
@@ -57,7 +56,7 @@ typeof(x)
 attributes(x)
 str(x)
 
-#cuando tabula un factor obtendrá recuentos de todas las categorías, incluso las no observadas
+#Cuando tabula un factor obtendrá recuentos de todas las categorías, incluso las no observadas
 sex_char <- c("m", "m", "m")
 sex_factor <- factor(sex_char, levels = c("m", "f"))
 
@@ -74,7 +73,7 @@ levels(f1) <- rev(levels(f1))
 f2 <- rev(factor(letters))
 f3 <- factor(letters, levels = rev(letters))
 
-####### lists #######
+####### Lists #######
 # Las listas son un paso más en complejidad que los vectores atómicos: cada elemento 
 # puede ser de cualquier tipo, no solo vectores. 
 list1 <- list(
@@ -89,9 +88,11 @@ str(list1)
 
 #dim : en listas crea matrices
 l <- list(1:3, "a", TRUE, 1.0)
-dim(l) <- c(2, 2)
+dim(l) <- c(2, 2) #creamos matriz 2x2
 l[[1,1]]
 l[[1,2]]
+l[[2,1]]
+l[[2,2]]
 
 # Los dos vectores S3 más importantes construidos sobre 
 # las listas son los data frames y los tibbles.
@@ -215,7 +216,7 @@ x <- runif(100, min =1 , max = 100)
 mean(x)
 sqrt(mean(square(deviation(x))))
 
-#canalización
+#Canalización
 library(magrittr)
 
 x %>%
@@ -224,9 +225,10 @@ x %>%
   mean() %>%
   sqrt()
 
-#llamar a funciones con argumentos en una estructura de datos
+#Llamar a funciones con argumentos en una estructura de datos
 args <- list(1:10)
-do.call(mean, args)
+mean(args) #error
+do.call(mean, args) #do this way
 
 #Valor de función explicito (via return) e implicito (ultima operacion ejecutada)
 #implicito
@@ -275,13 +277,17 @@ g(10)
 
 
 #### Programacion funcional ####
-triple <- function(x) x * 3 #función anónima
+triple <- function(x) x * 3 #función definida
 purrr::map(1:3, triple) # Toma un vector y una función, llama a la función por cada elemento y devuelve una lista
 
-#Existen 4 variantes, que modifican el resultado de map:  map_lgl(), map_int(), map_dbl() y map_chr()
-purrr::map_int(1:3, triple) # Devuelve lista de 3 enteros
-purrr::map_dbl(mtcars, function(x) length(unique(x))) #función anonima
+#Existen 23 variantes, que modifican el resultado de map:  map_lgl(), map_int(), map_dbl() y map_chr()
+purrr::map_int(1:3, triple) # Devuelve lista de 3 enteros, vector atómico de tipo entero
+purrr::map_dbl(mtcars, function(x) length(unique(x))) #función anonima en linea que devuelve vector atómico del tipo especificado
+
 #Escrito de otra manera
-map_dbl(mtcars, ~ length(unique(.x)))
+purrr::map_dbl(mtcars, ~ length(unique(.x))) #En lugar de una función existente, puedo crear una nueva
 #Reemplazos de bucle for como lapply(), apply() y tapply() son funcionales también
+
+
+
 
