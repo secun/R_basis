@@ -277,17 +277,42 @@ g(10)
 
 
 #### Programacion funcional ####
-triple <- function(x) x * 3 #función definida
-purrr::map(1:3, triple) # Toma un vector y una función, llama a la función por cada elemento y devuelve una lista
+#Toma de entrada una función y devuelve un vector
+randomise <- function(f) f(runif(1000))
+randomise(mean)
+randomise(sum) 
+randomise(length)
 
+###### Using map de purr ######
+triple <- function(x) x * 3 # Definimos funcion a utilizar
+purrr::map(1:3, triple) # Toma un vector y una función, llama a la función por cada elemento y devuelve una lista
 #Existen 23 variantes, que modifican el resultado de map:  map_lgl(), map_int(), map_dbl() y map_chr()
 purrr::map_int(1:3, triple) # Devuelve lista de 3 enteros, vector atómico de tipo entero
-purrr::map_dbl(mtcars, function(x) length(unique(x))) #función anonima en linea que devuelve vector atómico del tipo especificado
+purrr::map_dbl(mtcars, function(x) length(unique(x))) # Función anonima en linea que devuelve vector atómico del tipo especificado
 
 #Escrito de otra manera
 purrr::map_dbl(mtcars, ~ length(unique(.x))) #En lugar de una función existente, puedo crear una nueva
 #Reemplazos de bucle for como lapply(), apply() y tapply() son funcionales también
 
 
+###### Using replacemnts for iterations: lapply(), apply(), tapply() ######
+#apply resume una matriz al colapsar cada file o columna en un solo valor
+#Va muy bien par amatrices y funciones de resumen numerico
+apply(X = mtcars, #X: matriz, MARGIN: filas o columnas, FUN: la funcion
+      MARGIN = 2, 
+      FUN = mean ) 
 
 
+?lapply  #returns a list of the same length than X
+lapply(X = mtcars, 
+      FUN = mean ) 
+
+?sapply #returns a vector or matrix
+sapply(X = mtcars, 
+       FUN = mean ) 
+
+?tapply #apply a function to a group of data rows 
+        #defined by levels of a factor
+tapply(X = mtcars$mpg, 
+      INDEX = gear ,
+       FUN = mean ) 
