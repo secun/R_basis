@@ -131,4 +131,6 @@ ggplot(data = data, aes(x=NotaTeorica_10,y=NotaPractica_10,label = Alumno)) +
        x = "Calificación Teorica (0-10)",
        y = "Calificación Practica (0-10)") +
   theme_minimal()
+   
+   
 
