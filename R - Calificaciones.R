@@ -98,17 +98,15 @@ for (i in 1:4) {
 par(mfrow = c(1, 1))
 
 #### Visualize total alumni ######
-library(skimr)
 hist(data$NotaTeorica_10, main = "Resultados examen teórico sobre 10")
 hist(data$NotaPractica_10 , main = "Resultados examen Practico sobre 10")
-str(data)
 
 #Transform data
 # Create the box plot for nota teorica
 # Transform data to long format
 data_long <- pivot_longer(data[,20:21], cols = everything(), names_to = "Variable", values_to = "Value")
 
-# Create box plot
+# Create box plot for both scores
 ggplot(data_long, aes(x = Variable, y = Value)) +
   geom_boxplot(fill = "lightblue", color = "darkblue") +
   labs(title = "Box Plot of Theoretical and Practical Scores",
@@ -116,18 +114,6 @@ ggplot(data_long, aes(x = Variable, y = Value)) +
        y = "Calificacion") +
   theme_minimal()
 
-ggplot(data, aes(x = NotaTeorica_10)) +
-  geom_boxplot(fill = "lightblue", color = "darkblue") +
-  labs(title = "Box Plot de calificaciones en Teoría",
-       x = "Calificación") +
-  theme_minimal()
-
-# Create the box plot for nota practica
-ggplot(data, aes(x = NotaPractica_10)) +
-  geom_boxplot(fill = "lightblue", color = "darkblue") +
-  labs(title = "Box Plot de calificaciones en Práctica R",
-       X = "Calificación") +
-  theme_minimal()
 
 #Bivariate analysis
 cov(data$NotaTeorica_10,data$NotaPractica_10)
