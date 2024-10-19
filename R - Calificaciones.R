@@ -133,4 +133,6 @@ ggplot(data = data, aes(x=NotaTeorica_10,y=NotaPractica_10,label = Alumno)) +
   theme_minimal()
    
    
-
+#### Analisis respuestas en blanco ######
+data$NA_Count <- apply(data, 1, function(x) sum(is.na(x)))
+data[data$NA_Count !=0,c(1,22)]
