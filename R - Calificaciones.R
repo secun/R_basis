@@ -89,7 +89,7 @@ par(mar=c(1,1,1,1))
 # Loop through each question and create a barplot
 for (i in 1:4) {
   barplot(contingency_tables_pp[[i]], 
-          main = paste("Pregunta Teórica", i),
+          main = paste("Pregunta Práctica", i),
           xlab =  dimnames(contingency_tables_pp[[i]]),
           col= as.character(colorines[12+i,])
   )
